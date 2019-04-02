@@ -1,8 +1,33 @@
 function [ x, output, graf ]=bisectionAlgorithm(f,x0,TOL,NMAX)
-%bisectionAlgorithm : Calcola lo zero di una funzione in un dato intervallo
+%bisectionAlgorithm : 
 %    Calcola lo zero di una funzione in un dato intervallo utilizzando
 %    l'algoritmo della bisezione. Si può scegliere il numero massimo di
 %    iterazioni che può eseguire e la precisione del risultato
+%
+%   x = bisectionAlgorithm(f,x0) cerca di trovare un punto x in cui 
+%       f(x)=0 a meno di TOLF, all'interno dell'intervallo specificato
+%       da x0. La soluzione si trova nel punto in cui f(x) cambia segno: 
+%       gli estremi dell'intervallo devono essere necessariamente 
+%       discordi.
+%   
+%   x = bisectionAlgorithm(f,x0,TOL) usa TOL per determinare
+%       l'accuratezza della soluzione. Se non specificato, TOL=eps.
+% 
+%   x = bisectionAlgorithm(f,x0,TOL,NMAX) usa TOL per determinare 
+%       l'accuratezza della soluzione e NMAX per individuare il numero 
+%       massimo di iterazioni che l'algoritmo può compiere. Se non 
+%       specificati, TOL=eps, NMAX=500.
+% 
+%   [x, output] = bisectionAlgorithm(___) restituisce, oltre alla 
+%       soluzione, una struttura output che contiene due campi: fx con
+%       il valore della funzione in x, niter con il numero di iterazioni
+%       eseguite  dall'algoritmo per individuare la soluzione con quel 
+%       grado di accuratezza.
+
+%   [x, output, graf] = bisectionAlgorithm(___) restituisce anche una 
+%       variabile di tipo string, che indica l'avvenuto plotting del 
+%       grafico funzione e dello zero trovato.
+%        
 
 %% Limitazioni
 %   Si assume che la funzione f sia continua e limitata nell'intervallo di
@@ -23,8 +48,8 @@ function [ x, output, graf ]=bisectionAlgorithm(f,x0,TOL,NMAX)
 
 %% Test x0 :
 %   deve essere un intervallo da cui si parte con la prima iterazione.
-%   Valuto prima la lunghezza dell'array, deve essere precisamente uguale a
-%   2.
+%   Valuto prima la lunghezza dell'array, deve essere precisamente uguale 
+%   a 2.
 %   Se quest' ultima condizione è verificata, valuto la validità
 %   dell'intervallo, ovvero che non contenga inf e NaN.
 %   Errore :
@@ -40,14 +65,16 @@ function [ x, output, graf ]=bisectionAlgorithm(f,x0,TOL,NMAX)
 %   agli estremi, in caso contrario è inutile proseguire con l'elaborazione
 %   in quanto non esisterebbero zeri nell'intervallo dato in input.
 %   Errore :
-%           bisectionAlgorithm:ValueConcord
+%           bisectionAlgorithm:NoZero
 
     if f(x0(1))*f(x0(2)) > 0
-        error('bisectionAlgorithm:ValueConcord',...
+        error('bisectionAlgorithm:NoZero',...
                 'La funzione deve assumere valori discordi agli estremi dell''intervallo x0 oppure uno di essi deve annullare la funzione.'); 
     end
 
 %% Test sui parametri opzionali :
+%   Nel caso NMAX e TOL siano passati in input ne controlliamo la validità
+%   rispetto le specifiche definite 
 
     switch nargin
         case 2
@@ -91,27 +118,41 @@ function [ x, output, graf ]=bisectionAlgorithm(f,x0,TOL,NMAX)
     end
     
 %% Algoritmo di bisezione
+%   Le condizioni di terminazione del ciclo sono:
+%   - |b-a|/max(a,b) < TOL. Moltiplico per il max per evitare una eventuale
+%       divisione per 0. 
+%   - |f(c)| < TOLF, dove TOLF = eps ;
+%   - n° iterazioni > NMAX ;
 
-    a = x0(1) ; b = x0(2);
-    c = (a+b)/2;
-    
-    while ( abs(b-a) >= TOL*max(a,b) && abs(f(c)) >= eps && output.niter <= NMAX && ~extreme)
-        c = (a+b)/2;
-        output.niter = output.niter + 1;
-        if f(c) == eps
-            break;
-        elseif f(a) * f(c) < eps
-            b = c;
-        elseif f(b) * f(c) < eps
-            a = c;
-        end
-    end
-    
-    %
+% controllo se non ho trovato già uno zero nell'estremo
     if ~extreme
+        
+        % imposto gli estremi e trovo il primo punto di mezzo
+        a = x0(1) ; b = x0(2);
+        c = (a+b)/2;
+        
+        TOLF = eps;
+
+        % controllare criterio di arresto 
+        % dubbio abs(f(c)) >= 0  oppure abs(f(c)) >= eps
+        % dobbiamo mettere eps(0) o 0?
+        while ( abs(b-a) >= TOL*max(abs(a),abs(b)) && abs(f(c)) >= TOLF && output.niter <= NMAX )
+            c = (a+b)/2;
+            output.niter = output.niter + 1;
+            if f(c) == 0
+                break;
+            elseif f(a) * f(c) < 0
+                b = c;
+            elseif f(b) * f(c) < 0
+                a = c;
+            end
+        end
+        % end while
+
         x = c;
     end
-    
+        
+    % controllo se devo generare warning sul numero di iterazioni
     if  output.niter == 0 && ~extreme
         warning('bisectionAlgorithm:NoIterations',...
                 'L''algoritmo non ha eseguito alcuna iterazione. Il valore ottenuto è poco accurato, si consiglia di aumentare il valore del parametro TOL. Visualizza la documentazione per ulteriori dettagli.');
@@ -128,9 +169,11 @@ function [ x, output, graf ]=bisectionAlgorithm(f,x0,TOL,NMAX)
             output.fx = f(x);
         case 3
             output.fx = f(x);
-            graf = genGraf(f,x0)
+            graf = genGraf(f,x0,c);
     end
-end
+
+% end bisectionAlgorithm
+end 
 
 %% Controllo di validità di TOL :
 %   Tol deve essere un numero positivo e non minore di eps
@@ -147,6 +190,7 @@ function TOL = Control_TOL (TOL)
                     'Valore di tolleranza inferiore a eps, verrà usato eps')
         TOL = eps ;
     end
+    
 
 end
 
@@ -174,6 +218,14 @@ end
 
 %% Generazione del grafico :
 %
-function graf = genGraf(f,x)
-    graf = 0 ;
+function graf = genGraf(f,x,c)
+% da implementare
+    asc = linspace(x(1),x(2));
+    plot(asc,f(asc),c,f(c),'*','LineWidth',2,'MarkerSize',10);
+    grid on;
+    title('Funzione f nell''intervallo x0');
+    xlabel('x');
+    ylabel('y');
+    graf='Plotted';
+
 end
