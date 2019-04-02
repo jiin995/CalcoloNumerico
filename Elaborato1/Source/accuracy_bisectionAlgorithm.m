@@ -8,4 +8,3 @@ function relativeError = accuracy_bisectionAlgorithm(f,x0,TOL)
     relativeError = abs(sol - fzeroSol)/abs(fzeroSol); 
     
 end
-

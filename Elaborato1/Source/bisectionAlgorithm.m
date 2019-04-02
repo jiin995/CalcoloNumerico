@@ -168,7 +168,7 @@ function [ x, output, graf ]=bisectionAlgorithm(f,x0,TOL,NMAX)
             output.fx = f(x);
         case 3
             output.fx = f(x);
-            graf = genGraf(f,x0,c);
+            graf = genGraf(f,x0,c);   
     end
 
 % end bisectionAlgorithm
