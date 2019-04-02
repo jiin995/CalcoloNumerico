@@ -139,9 +139,8 @@ function [ x, output, graf ]=bisectionAlgorithm(f,x0,TOL,NMAX)
         while ( abs(b-a) >= TOL*max(abs(a),abs(b)) && abs(f(c)) >= TOLF && output.niter <= NMAX )
             c = (a+b)/2;
             output.niter = output.niter + 1;
-            if f(c) == 0
-                break;
-            elseif f(a) * f(c) < 0
+
+            if f(a) * f(c) < 0
                 b = c;
             elseif f(b) * f(c) < 0
                 a = c;
