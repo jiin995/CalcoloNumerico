@@ -86,9 +86,11 @@ function testFunctionCase3(testCase)
 % Test specific code
     [f,x0] = getGlobalParameter;
     
-    [~,~,graf]= bisectionAlgorithm(f,x0);
+    [~,~]= bisectionAlgorithm(f,x0,1e-10,400,'g');
 
-    if ischar(graf)
+    figure2handle = findall(0,'Tag','figure1');
+
+    if isempty(figure2handle)
         % passed
         verifyReturnsTrue(testCase,@true);
     else

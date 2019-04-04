@@ -1,4 +1,4 @@
-function [ x, output, graf ]=bisectionAlgorithm(f,x0,TOL,NMAX)
+function [ x, output ]=bisectionAlgorithm(f,x0,TOL,NMAX,graf)
 %bisectionAlgorithm : 
 %    Calcola lo zero di una funzione in un dato intervallo utilizzando
 %    l'algoritmo della bisezione. Si può scegliere il numero massimo di
@@ -17,17 +17,16 @@ function [ x, output, graf ]=bisectionAlgorithm(f,x0,TOL,NMAX)
 %       l'accuratezza della soluzione e NMAX per individuare il numero 
 %       massimo di iterazioni che l'algoritmo può compiere. Se non 
 %       specificati, TOL=eps, NMAX=500.
-% 
+%
+%   x = bisectionAlgorithm(f,x0,TOL,NMAX,graf) restituisce anche una 
+%       finestra con il grafico funzione e dello zero trovato.
+%        
 %   [x, output] = bisectionAlgorithm(___) restituisce, oltre alla 
 %       soluzione, una struttura output che contiene due campi: fx con
 %       il valore della funzione in x, niter con il numero di iterazioni
 %       eseguite  dall'algoritmo per individuare la soluzione con quel 
 %       grado di accuratezza.
 
-%   [x, output, graf] = bisectionAlgorithm(___) restituisce anche una 
-%       variabile di tipo string, che indica l'avvenuto plotting del 
-%       grafico funzione e dello zero trovato.
-%        
 
 %% Limitazioni
 %   Si assume che la funzione f sia continua e limitata nell'intervallo di
@@ -86,6 +85,13 @@ function [ x, output, graf ]=bisectionAlgorithm(f,x0,TOL,NMAX)
         case 4
             Control_NMAX(NMAX) ;
             Control_TOL(TOL) ;
+        case 5 
+            Control_NMAX(NMAX) ;
+            Control_TOL(TOL) ;
+            if ~ischar(graf)
+                error('bisectionAlgorithm:bagGraf',...
+                        'graf deve essere un char e non un %s',class(graf));
+            end
     end
     
    %disp("TOL  : "+ TOL)
@@ -163,14 +169,13 @@ function [ x, output, graf ]=bisectionAlgorithm(f,x0,TOL,NMAX)
 %% Controllo di nargout :
 %   solo se richiesto calcolo fx e il grafico
 
-    switch nargout
-        case 2
+    if nargout == 2
             output.fx = f(x);
-        case 3
-            output.fx = f(x);
-            graf = genGraf(f,x0,c);   
     end
-
+    
+    if nargin==5 && ischar(graf)
+        genGraf(f,x0,c);  
+    end
 % end bisectionAlgorithm
 end 
 
@@ -217,7 +222,7 @@ end
 
 %% Generazione del grafico :
 %
-function graf = genGraf(f,x,c)
+function genGraf(f,x,c)
 % da implementare
     asc = linspace(x(1),x(2));
     plot(asc,f(asc),c,f(c),'*','LineWidth',2,'MarkerSize',10);
@@ -225,6 +230,4 @@ function graf = genGraf(f,x,c)
     title('Funzione f nell''intervallo x0');
     xlabel('x');
     ylabel('y');
-    graf='Plotted';
-
 end
