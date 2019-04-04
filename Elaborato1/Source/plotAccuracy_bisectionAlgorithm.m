@@ -1,7 +1,8 @@
 function relativeError = plotAccuracy_bisectionAlgorithm(f,x0,TOL)
-% accuracy_bisectionAlgorithm : Ritorna l'errore relativo tra i risultati
-% ottenuti con fzero e con bisectionAlgorithm al variare di TOL
-%
+% plotAccuracy_bisectionAlgorithm  genera un grafico che mostra
+% l'andamento dell'errore relativo tra il risultato ottenuto con
+% bisectionAlgorithm e con fzero, al variare della tolleranza
+
     errors=zeros(1,length(TOL));
     
     % calcolo il numero di iterazioni

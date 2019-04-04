@@ -78,8 +78,9 @@ function testFunctionCase3(testCase)
 % Configurazione parametri bisectionAlgorithm
 %   - func              -> valido
 %   - x0                -> valido
-%   - TOL               -> empty
-%   - NMAX              -> empty
+%   - TOL               -> valido
+%   - NMAX              -> valido
+%   - graf              -> valido
 %   - ip. teorema       -> verificate
 %   - output parameter  -> 2
 
@@ -101,12 +102,12 @@ end
 
 function testFunctionCase4(testCase)
 % Configurazione parametri bisectionAlgorithm
-%   - func -> NON valido
-%   - x0 -> valido
-%   - TOL -> empty
-%   - NMAX -> empty
-%   - ip. teorema -> verificate
-%   - output parameter -> 1
+%   - func              -> NON valido
+%   - x0                -> valido
+%   - TOL               -> empty
+%   - NMAX              -> empty
+%   - ip. teorema       -> verificate
+%   - output parameter  -> 1
 
 % Test specific code
     
@@ -117,12 +118,12 @@ end
 
 function testFunctionCase5(testCase)
 % Configurazione parametri bisectionAlgorithm
-%   - func -> valido
-%   - x0 -> INTERVALLO VUOTO
-%   - TOL -> empty
-%   - NMAX -> empty
-%   - ip. teorema -> verificate
-%   - output parameter -> 1
+%   - func              -> valido
+%   - x0                -> INTERVALLO VUOTO
+%   - TOL               -> empty
+%   - NMAX              -> empty
+%   - ip. teorema       -> verificate
+%   - output parameter  -> 1
 
 % Test specific code
     
@@ -133,12 +134,12 @@ end
 
 function testFunctionCase6(testCase)
 % Configurazione parametri bisectionAlgorithm
-%   - func -> valido
-%   - x0 -> INTERVALLO DI LUNGHEZZA SBAGLIATA
-%   - TOL -> empty
-%   - NMAX -> empty
-%   - ip. teorema -> verificate
-%   - output parameter -> 1
+%   - func              -> valido
+%   - x0                -> INTERVALLO DI LUNGHEZZA SBAGLIATA
+%   - TOL               -> empty
+%   - NMAX              -> empty
+%   - ip. teorema       -> verificate
+%   - output parameter  -> 1
 
 % Test specific code
     
@@ -149,12 +150,12 @@ end
 
 function testFunctionCase7(testCase)
 % Configurazione parametri bisectionAlgorithm
-%   - func -> valido
-%   - x0 -> INTERVALLO NON NUMERICO
-%   - TOL -> empty
-%   - NMAX -> empty
-%   - ip. teorema -> verificate
-%   - output parameter -> 1
+%   - func              -> valido
+%   - x0                -> INTERVALLO NON NUMERICO
+%   - TOL               -> empty
+%   - NMAX              -> empty
+%   - ip. teorema       -> verificate
+%   - output parameter  -> 1
 
 % Test specific code
     
@@ -165,12 +166,12 @@ end
 
 function testFunctionCase8(testCase)
 % Configurazione parametri bisectionAlgorithm
-%   - func -> valido
-%   - x0 -> valido
-%   - TOL -> TOL < eps
-%   - NMAX -> empty
-%   - ip. teorema -> verificate
-%   - output parameter -> 1
+%   - func              -> valido
+%   - x0                -> valido
+%   - TOL               -> TOL < eps
+%   - NMAX              -> empty
+%   - ip. teorema       -> verificate
+%   - output parameter  -> 1
 
 % Test specific code
     
@@ -181,12 +182,12 @@ end
 
 function testFunctionCase9(testCase)
 % Configurazione parametri bisectionAlgorithm
-%   - func -> valido
-%   - x0 -> valido
-%   - TOL -> TOL > eps
-%   - NMAX -> empty
-%   - ip. teorema -> verificate
-%   - output parameter -> 1
+%   - func              -> valido
+%   - x0                -> valido
+%   - TOL               -> TOL > eps
+%   - NMAX              -> empty
+%   - ip. teorema       -> verificate
+%   - output parameter  -> 1
 
 % Test specific code
     
@@ -207,12 +208,12 @@ end
 
 function testFunctionCase10(testCase)
 % Configurazione parametri bisectionAlgorithm
-%   - func -> valido
-%   - x0 -> valido
-%   - TOL -> TOL < 0
-%   - NMAX -> empty
-%   - ip. teorema -> verificate
-%   - output parameter -> 1
+%   - func              -> valido
+%   - x0                -> valido
+%   - TOL               -> TOL < 0
+%   - NMAX              -> empty
+%   - ip. teorema       -> verificate
+%   - output parameter  -> 1
 
 % Test specific code
     
@@ -223,12 +224,12 @@ end
 
 function testFunctionCase11(testCase)
 % Configurazione parametri bisectionAlgorithm
-%   - func -> valido
-%   - x0 -> valido
-%   - TOL -> TOL not numeric
-%   - NMAX -> empty
-%   - ip. teorema -> verificate
-%   - output parameter -> 1
+%   - func              -> valido
+%   - x0                -> valido
+%   - TOL               -> TOL not numeric
+%   - NMAX              -> empty
+%   - ip. teorema       -> verificate
+%   - output parameter  -> 1
 
 % Test specific code
     
@@ -239,12 +240,12 @@ end
 
 function testFunctionCase12(testCase)
 % Configurazione parametri bisectionAlgorithm
-%   - func -> valido
-%   - x0 -> valido
-%   - TOL -> valido
-%   - NMAX -> not numeric
-%   - ip. teorema -> verificate
-%   - output parameter -> 1
+%   - func              -> valido
+%   - x0                -> valido
+%   - TOL               -> valido
+%   - NMAX              -> not numeric
+%   - ip. teorema       -> verificate
+%   - output parameter  -> 1
 
 % Test specific code
     
@@ -256,12 +257,12 @@ end
 
 function testFunctionCase13(testCase)
 % Configurazione parametri bisectionAlgorithm
-%   - func -> valido
-%   - x0 -> valido
-%   - TOL -> valido
-%   - NMAX -> NMAX < 0
-%   - ip. teorema -> verificate
-%   - output parameter -> 1
+%   - func              -> valido
+%   - x0                -> valido
+%   - TOL               -> valido
+%   - NMAX              -> NMAX < 0
+%   - ip. teorema       -> verificate
+%   - output parameter  -> 1
 
 % Test specific code
     
@@ -273,12 +274,12 @@ end
 
 function testFunctionCase14(testCase)
 % Configurazione parametri bisectionAlgorithm
-%   - func -> valido
-%   - x0 -> valido
-%   - TOL -> valido
-%   - NMAX -> 0 < NMAX < 10
-%   - ip. teorema -> verificate
-%   - output parameter -> 1
+%   - func              -> valido
+%   - x0                -> valido
+%   - TOL               -> valido
+%   - NMAX              -> 0 < NMAX < 10
+%   - ip. teorema       -> verificate
+%   - output parameter  -> 1
 
 % Test specific code
     
@@ -290,12 +291,12 @@ end
 
 function testFunctionCase15(testCase)
 % Configurazione parametri bisectionAlgorithm
-%   - func -> valido
-%   - x0 -> valido
-%   - TOL -> valido
-%   - NMAX -> NMAX > 500
-%   - ip. teorema -> verificate
-%   - output parameter -> 1
+%   - func              -> valido
+%   - x0                -> valido
+%   - TOL               -> valido
+%   - NMAX              -> NMAX > 500
+%   - ip. teorema       -> verificate
+%   - output parameter  -> 1
 
 % Test specific code
     
@@ -318,12 +319,12 @@ end
 
 function testFunctionCase16(testCase)
 % Configurazione parametri bisectionAlgorithm
-%   - func -> valido
-%   - x0 -> valido
-%   - TOL -> valido
-%   - NMAX -> NMAX > 1000
-%   - ip. teorema -> verificate
-%   - output parameter -> 1
+%   - func              -> valido
+%   - x0                -> valido
+%   - TOL               -> valido
+%   - NMAX              -> NMAX > 1000
+%   - ip. teorema       -> verificate
+%   - output parameter  -> 1
 
 % Test specific code
     
@@ -335,12 +336,12 @@ end
 
 function testFunctionCase17(testCase)
 % Configurazione parametri bisectionAlgorithm
-%   - func -> valido
-%   - x0 -> valido
-%   - TOL -> valido
-%   - NMAX -> 0 < NMAX < 500
-%   - ip. teorema -> verificate
-%   - output parameter -> 1
+%   - func              -> valido
+%   - x0                -> valido
+%   - TOL               -> valido
+%   - NMAX              -> 0 < NMAX < 500
+%   - ip. teorema       -> verificate
+%   - output parameter  -> 1
 
 % Test specific code
     
@@ -363,12 +364,12 @@ end
 
 function testFunctionCase18(testCase)
 % Configurazione parametri bisectionAlgorithm
-%   - func -> valido
-%   - x0 -> valido
-%   - TOL -> empty
-%   - NMAX -> empty
-%   - ip. teorema -> NON verificate
-%   - output parameter -> 1
+%   - func              -> valido
+%   - x0                -> valido
+%   - TOL               -> empty
+%   - NMAX              -> empty
+%   - ip. teorema       -> NON verificate
+%   - output parameter  -> 1
 
 % Test specific code
     [fun,~] = getGlobalParameter;
@@ -378,12 +379,12 @@ end
 
 function testFunctionCase19(testCase)
 % Configurazione parametri bisectionAlgorithm
-%   - func -> valido
-%   - x0 -> valido
-%   - TOL -> empty
-%   - NMAX -> empty
-%   - ip. teorema -> verificate
-%   - output parameter -> OUT > 3
+%   - func              -> valido
+%   - x0                -> valido
+%   - TOL               -> empty
+%   - NMAX              -> empty
+%   - ip. teorema       -> verificate
+%   - output parameter  -> OUT > 2
 
 % Test specific code
 
@@ -394,12 +395,12 @@ end
 
 function testFunctionCase20(testCase)
 % Configurazione parametri bisectionAlgorithm
-%   - func -> valido
-%   - x0 -> valido
-%   - TOL -> empty
-%   - NMAX -> empty
-%   - ip. teorema -> verificate, lo zero è un estremo di x0
-%   - output parameter -> 1
+%   - func              -> valido
+%   - x0                -> valido
+%   - TOL               -> empty
+%   - NMAX              -> empty
+%   - ip. teorema       -> verificate, lo zero è un estremo di x0
+%   - output parameter  -> 1
 
 % Test specific code
     
@@ -413,12 +414,12 @@ end
 
 function testFunctionCase21(testCase)
 % Configurazione parametri bisectionAlgorithm
-%   - func -> valido
-%   - x0 -> è un punto
-%   - TOL -> empty
-%   - NMAX -> empty
-%   - ip. teorema -> verificate, lo zero è il punto passato
-%   - output parameter -> 1
+%   - func              -> valido
+%   - x0                -> è un punto
+%   - TOL               -> empty
+%   - NMAX              -> empty
+%   - ip. teorema       -> verificate, lo zero è il punto passato
+%   - output parameter  -> 1
 
 % Test specific code
     
@@ -430,12 +431,12 @@ end
 
 function testFunctionCase22(testCase)
 % Configurazione parametri bisectionAlgorithm
-%   - func -> valido
-%   - x0 -> non limitato
-%   - TOL -> empty
-%   - NMAX -> empty
-%   - ip. teorema -> verificate
-%   - output parameter -> 1
+%   - func              -> valido
+%   - x0                -> non limitato
+%   - TOL               -> empty
+%   - NMAX              -> empty
+%   - ip. teorema       -> verificate
+%   - output parameter  -> 1
 
 % Test specific code
     [fun,~] = getGlobalParameter;
