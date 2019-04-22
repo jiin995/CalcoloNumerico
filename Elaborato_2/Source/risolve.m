@@ -56,7 +56,7 @@ function opt = checkInput(A,b,opt)
 %   La matrice non deve essere singolare.
     
     if issparse(A)
-        error('risolve:ANotFull',...
+        error('risolve:ANotMatrix',...
                 'La matrice A deve essere piena.');
     end
     
@@ -72,7 +72,7 @@ function opt = checkInput(A,b,opt)
     
 % verifico che A non sia singolare e quindi il sistema ammette un unica
 % soluzione in quanto il numero di eq coincide con il numero di variabili
-%vedo se la diagonale ha uno zero, test valido per verificare che 
+% vedo se la diagonale ha uno zero, test valido per verificare che 
 % le matrici diagonali non siano singolari, altrimenti calcolo il
 % terminante e vedo se è diverso da 0
 %% Da controllare se conviene metterlo qui o nelle funzioni di risoluzione
@@ -86,8 +86,8 @@ function opt = checkInput(A,b,opt)
 % di righe deve essere pari al numero di righe di A.
     
     if size(b,1) ~= size(A,1) || size(b,2)~=1
-        error('risolve:bDimension',...
-                'b deve essere un vettore colonna.');
+        error('risolve:bInvalidDimension',...
+                'b deve essere un vettore colonna della stessa dimensione di A.');
     end
     
     if ~isnumeric(b) || any(find(isinf(b))) || any(find(isnan(b))) || ~isreal(b) || isempty(b)
@@ -159,28 +159,31 @@ function opt = checkInput(A,b,opt)
 
 % se è tringolare superiore ==> opt.sup=true
     if istriu(A)
+        disp('triu');
         if opt.sup == false
-            opt.sup = true;
-            warning('risolve:optWarning1',...
-                    'La matrice A è triangolare superiore, ma opt.sup=false. Verrà forzata la risoluzione mediante l''algoritmo di forward substitution.');
+           opt.sup = true;
+           warning('risolve:optWarning1',...
+                    'La matrice A è triangolare superiore, ma opt.sup=false. Verrà forzata la risoluzione mediante l''algoritmo di forward substitution. Si consiglia di visionare la documentazione di risolve.');
         end
         opt.inf = false;
         opt.full = false;
 % altrimenti se è tringolare inferiore ==> opt.inf=true
     elseif istril(A)
+                disp('tril');
+
         if opt.inf == false
-            opt.int = true;
-            warning('risolve:optWarning2',...
-                    'La matrice A è triangolare inferiore, ma opt.inf=false. Verrà forzata la risoluzione mediante l''algoritmo di back substitution.');
+           opt.int = true;
+           warning('risolve:optWarning2',...
+                    'La matrice A è triangolare inferiore, ma opt.inf=false. Verrà forzata la risoluzione mediante l''algoritmo di back substitution. Si consiglia di visionare la documentazione di risolve.');
         end
         opt.sup = false;
         opt.full = false;
 % altrimenti se è piena ==> opt.full=true
-    else
+    else 
         if opt.full == false
-            opt.full = true;
-            warning('risolve:optWarning3',...
-                   'La matrice A è piena, ma non opt.full=false. Verrà forzata la risoluzione mediante l''algoritmo di Gauss.');
+           opt.full = true;
+           warning('risolve:optWarning3',...
+                   'La matrice A è piena, ma non opt.full=false. Verrà forzata la risoluzione mediante l''algoritmo di Gauss. Si consiglia di visionare la documentazione di risolve.');
 
         end
         opt.sup = false;
@@ -331,7 +334,7 @@ function [A,b,piv] = gauss(A,b)
 % controllo se l'ultimo elemento della nuova matrice è minore di eps, in
 % caso positivo si ha che A è singolare
     if abs(A(piv(n),n)) <= zero 
-        error('risolve:ASingular','Matrice A singolare.Non è possibile risolvere il sistema')
+        error('risolve:ASingular','Matrice A singolare. Non è possibile risolvere il sistema')
     end
     
 end

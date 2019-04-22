@@ -8,14 +8,14 @@ function  risolveAccuracyMesurement(inf,sup)
     warning('off','all');
     if(inf <= sup && inf > 1 )
 
-        result = struct('condIndex',zeros(1,1), 'errore',zeros(1,1),'residuo',zeros(1,1));
+        result = struct('cond',zeros(1,1),'rcond',zeros(1,1), 'errore',zeros(1,1),'residuo',zeros(1,1));
         for i=inf:sup
             A = rand(i,i)*i*10;
             x = rand(i,1);
             b = A*x;
             result(i)=risolveAccuracy(A,b,x,'full');
         end
-        writetable(struct2table(result), 'accuracyMesurement.xlsx','Sheet','Piena');
+        writetable(  struct2table(result) , 'accuracyMesurement.xlsx','Sheet','Piena');
         
         for i=inf:sup
             A = triu(rand(i,i)*i);
@@ -23,7 +23,7 @@ function  risolveAccuracyMesurement(inf,sup)
             b = A*x;
             result(i)=risolveAccuracy(A,b,x,'sup');
         end
-        writetable(struct2table(result),'accuracyMesurement.xlsx','Sheet','Triangolare superiore');
+        writetable( struct2table(result) ,'accuracyMesurement.xlsx','Sheet','Triangolare superiore');
         
         for i=inf:sup
             A = tril(rand(i,i)*i);
@@ -31,7 +31,7 @@ function  risolveAccuracyMesurement(inf,sup)
             b = A*x;
             result(i)=risolveAccuracy(A,b,x,'inf');
         end
-        writetable(struct2table(result),'accuracyMesurement.xlsx','Sheet','Triangolare inferiore');
+        writetable( struct2table(result),'accuracyMesurement.xlsx','Sheet','Triangolare inferiore');
 
     else
         error("inf deve essere maggiore di 1 e minore di sup");

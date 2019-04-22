@@ -9,7 +9,9 @@ function accuracy = risolveAccuracy(A,b,x,type)
 %           - x : vettore tale che Ax=b
 % Output :
 %           - Accuracy : struttura composta da tre campi :
-%               - condIndex : Indice di condizionamento della matrice A 
+%               - cond      : Indice di condizionamento della matrice A
+%               - rcond     : Reciproco dell'indice di condizionamento 
+%                             della matrice A
 %               - errore    : errore relativo tra la soluzione individuata
 %                             utilizzando resolve e quella vera del
 %                             sistema.
@@ -31,7 +33,8 @@ function accuracy = risolveAccuracy(A,b,x,type)
         error("Type non valido");
     end
     
-    accuracy.condIndex = cond(A);
+    accuracy.cond = cond(A);
+    accuracy.rcond = rcond(A);
     xRisolve = risolve(A,b,opt);
     accuracy.errore = norm(x-xRisolve)/norm(x);
     
