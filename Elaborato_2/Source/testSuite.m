@@ -1,6 +1,3 @@
-%% Main function to generate tests
-% Lanciare la simulazione con l'istruzione:
-% results = runtests('testSuite.m');
 
 function tests = testSuite
     tests = functiontests(localfunctions);

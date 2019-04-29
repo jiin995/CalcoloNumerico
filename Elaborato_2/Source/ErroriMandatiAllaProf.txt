@@ -1,0 +1,5 @@
+risolveTest:
+	- Frase introduttiva sbagliata, parla dell'algoritmo di bisezione
+
+risolveDoc:
+	- Argomenti di output x: "Tale soluzione, nel caso che la matrice A sia piena è" vale anche se A è triangolare!
