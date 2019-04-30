@@ -39,7 +39,7 @@ function accuracy = risolveAccuracy(A,b,x,type)
     accuracy.errore = norm(x-xRisolve)/norm(x);
     
     if strcmp(type,'full')
-        accuracy.residuo = (norm(b - A*xRisolve)/norm(b));
+        accuracy.residuo = norm(b - A*xRisolve)/norm(b);
     else
         % valore non valido che segnala che la matrice dei coefficienti era
         % triangolare superiore o inferiore.
