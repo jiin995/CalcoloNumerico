@@ -111,7 +111,7 @@ function testFunctionCase7(testCase)
     A = sprand(10,10,0.1) + speye(10,10) ;
     b = rand(10);
     
-    testCase.verifyError(@()jacobi(A,b),'jacobi:ColInvalidDimension')
+    testCase.verifyError(@()jacobi(A,b),'jacobi:bInvalidDimension')
 end
 
 

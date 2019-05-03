@@ -18,8 +18,8 @@ function accuracy = jacobiAccuracy(A,x,TOL,MAXITER)
 %                             norma di b. (xJacobi = jacobi(a,b) )
 
     
-%Calcolo il vettore dei termini noti a partire da A e x in modo tale da
-%creare un sistema adHoc per eseguire i test
+% Calcolo il vettore dei termini noti a partire da A e x in modo tale da
+% creare un sistema adHoc per eseguire i test
     b = A*x;
     
 % prevedo di poter dare in input TOL e MAXITER
@@ -32,8 +32,6 @@ function accuracy = jacobiAccuracy(A,x,TOL,MAXITER)
         case 2
             [xJacobi,niter,resRel] = jacobi(A,b);
     end
-% Eseguo jacobi sul sistema in input
-%     [xc,jOut] = jacobi(A,b,TOL,MAXITER);
     
     accuracy.cond = condest(A);
     accuracy.erroreRel = norm(x-xJacobi,Inf)/norm(xJacobi,Inf);

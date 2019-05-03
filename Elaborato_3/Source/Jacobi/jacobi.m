@@ -57,7 +57,7 @@ function [x,niter,resrel] = jacobi(A,b,TOL,MAXITER)
 %% Jacobi
 
 % Inizializzazione    
-% Inversa sparsa della matrice diag(A)
+% sparsa della matrice 1/diag(A)
     x = zeros(n,1);
     DInv = sparse(1:n,1:n,1./diag(A)); 
     
@@ -92,7 +92,8 @@ function [x,niter,resrel] = jacobi(A,b,TOL,MAXITER)
 
 
 % La funzione ha raggiunto il numero massimo di iterazioni e quindi non
-% sta ancora convergendo alla soluzione con l'accuratezza richiesta 
+% sta ancora convergendo alla soluzione con l'accuratezza richiesta in
+% questo caso, viene anche calcolatoil residuo relativo
 
     if  MAXITER == NITER 
         resrel = norm(b-A*x,Inf)/norm(b,Inf);
@@ -104,6 +105,7 @@ function [x,niter,resrel] = jacobi(A,b,TOL,MAXITER)
     if nargout == 2
         niter = NITER;
     end
+    
 % Il residuo relativo viene calcolato solo se l'utente specifica il
 % parametro di output.
     if nargout == 3
@@ -149,17 +151,17 @@ end
 %   b deve essere un vettore colonna di dimensione pari a quella della
 %   matrice A e deve contenere elementi reali.
 %   Errore :
-%           jacobi:ColInvalidDimension;
-%           jacobi:ColInvalidValue.
+%           jacobi:bInvalidDimension;
+%           jacobi:bInvalidValue.
 
 function checkB(col,n)
 
     if size(col,1) ~= n || size(col,2)~=1
-        error('jacobi:ColInvalidDimension','Dimensione del vettore errata.');
+        error('jacobi:bInvalidDimension','Dimensione del vettore errata.');
     end
     
     if ~isnumeric(col) || any(find(isinf(col))) || any(find(isnan(col))) || ~isreal(col) || isempty(col)
-        error('jacobi:ColInvalidValue',...
+        error('jacobi:bInvalidValue',...
                 'Uno o più valori inseriti nel vettore colonna non sono validi');
     end
 end
