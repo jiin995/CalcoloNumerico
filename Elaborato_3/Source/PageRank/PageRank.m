@@ -3,15 +3,16 @@ function [Rank,OUT,IN] = PageRank(G)
 %       l’ordinamento delle pagine web.
 %
 %   [R OUT IN] = PageRank(G) calcola il rank delle pagine web di cui 
-%       G rappresenta la matrice di adiacenza.
+%                G rappresenta la matrice di adiacenza.
+%
 %   Input :
 %       - G : deve essere una matrice quadrata sparsa, costituita da 
 %           elementi logical (ogni elemento della matrice deve essere 0 
 %           o 1). 
 %   Output
 %       - R     : vettore dei rank delle pagine ;
-%       - OUT   : outdegree delle pagine, nodi uscenti dalla pagina i ;
-%       - IN    : indegree  delle pagine, nodi che puntano alla pagina i.
+%       - OUT   : outdegree delle pagine, link uscenti dalla pagina i ;
+%       - IN    : indegree  delle pagine, link che puntano alla pagina i.
     
 %% Controllo di validità di G
 % G deve essere una matrice quadrata sparsa, contenente elementi di tipo
@@ -22,6 +23,7 @@ function [Rank,OUT,IN] = PageRank(G)
         error('PageRank:GInvalid',...
                 'La matrice di adiacenza G deve essere quadrata e sparsa');
     end
+    
 % Converte gli elementi ~=0 in true e quelli uguali a 0 in false
     if ~islogical(G)
         warning('PageRank:GInvalideElement',...
@@ -29,12 +31,12 @@ function [Rank,OUT,IN] = PageRank(G)
         G = logical(G);
     end
 
-%% Calcolo page rank
-% Inizializzazione
+
+%% Inizializzazione e definzione dei parametri standard per l'algoritmo
     TOL = 1e-7;
     p = 0.85;
 
-%% self loop
+%% Risolvo problema dei self loop
 % Per rimuovere i problemi dei self loop, basta porre a 0 gli elementi
 % sulla diagonale principale di G, lo faccio solo se trovo un elemento ~=0
 % sulla diagonale sennò sarebbe inutile
@@ -50,7 +52,7 @@ function [Rank,OUT,IN] = PageRank(G)
 % Soluzione iniziale
     Rank=ones(n,1)/n;
     
-% Calcola tutti gli Nj, per ogni colonna, determinando il vettore 
+% Calcola tutti gli Nj per ogni colonna, determinando il vettore 
 % degli outdegree
     N = full(sum(G));
 
@@ -63,6 +65,7 @@ function [Rank,OUT,IN] = PageRank(G)
 % inutili
     N(N~=0)=1./N(N~=0);
 
+%% Implementazione dell'algoritmo pagerank
     TOLX = checkUnderflowTOLX(TOL,Rank);
     
 % L'espressione viene calcolata solo una volta
