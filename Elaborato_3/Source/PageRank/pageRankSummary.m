@@ -1,10 +1,22 @@
 function pageRankSummary(filename)
+% A partire da G e URL memorizzati nel file .mat indicato da filename,
+% calcola il pageRank e visualizza una finestra che mostra la struttura di
+% G e il grafo associato ad esso associato; mostra i primi 15 risultati in 
+% ordine decrescente, con i corrispondenti outdegree e indegree;
+% Visualizzare un grafico a barre del PageRank;
+% Visualizzare il sottografo costituito dai nodi con rank maggiore della
+% media dei rank.
+%   
+% Esempio : 
+%           pageRankSummary("repubblica.mat")
 %% Controllo di validità di filename
-    if ~isstring(filename) || isempty(strfind(filename,".mat"))
+    if ~isstring(filename) || ~contains(filename,".mat")
         error('PageRankSummary:filenameInvalid',...
                 'filename deve essere una stringa che specifica il file .mat da cui caricare i dati ')
     end
-    clear;
+    clear G;
+    clear U;
+    clear URL;
     load(filename)
     %whos
 %% Controllo di validità di URL
@@ -31,8 +43,8 @@ function pageRankSummary(filename)
     end
     
     [R,OUT,IN]=PageRank(G);
-    
-    %Stampa del grafico che mostra la struttura di G
+%% Visualizzazione ulteriori informazioni 
+% Stampa del grafico che mostra la struttura di G
     fig1=figure('Name','Struttura di G','NumberTitle','off');
     spy(G)
     
@@ -49,7 +61,7 @@ function pageRankSummary(filename)
     graph.Nodes.InDegree = INDEGREE;
     graph.Nodes.OutDegree = OUTDEGREE;
     
-%Ordino stampo la tabella con i primi 15 risultati in ordine decrescente
+% Ordino e stampo la tabella con i primi 15 risultati in ordine decrescente
     [R, index] = sort(R,'descend');
     sites = URL(index(1:15));
     ID    = index(1:15);
