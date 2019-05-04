@@ -1,13 +1,17 @@
 function accuracy = jacobiAccuracy(A,x,TOL,MAXITER)
 %jacobiAccuracy - Calcola l'errore relativo della soluzione di un sistema 
 %                  lineare con A sparsa  calcolata con risolve
-%                 
-% Utilizza jacobi per calcolare la soluzione di un sistemalineare la cui 
-% matrice dei coefficienti A è sparsa, il vettore dei termini noti è b e 
-% la soluzione è x.
+% - jacobiAccuracy(A,x,TOL,MAXITER)
+%       Utilizza jacobi per calcolare la soluzione di un sistema lineare,   
+%       la cui matrice dei coefficienti A è sparsa, il vettore dei termini
+%        noti è b e  la soluzione è x.
 % Input  :
-%           - A : matrice dei coefficienti
-%           - x : vettore delle soluzioni reali
+%           - A       : matrice dei coefficienti
+%           - x       : vettore delle soluzioni reali
+%           - TOL     : valore di tolleranza desiderato, determina il numero
+%           di cifre corrette della soluzione. Opzionale
+%           - MAXITER : Numero massimo di iteazioni che l'algoritmo può
+%           eseguire. Opzionale
 % Output :
 %           - Accuracy : struttura composta da tre campi :
 %               - cond      : Indice di condizionamento della matrice A

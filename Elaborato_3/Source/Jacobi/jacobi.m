@@ -51,7 +51,8 @@ function [x,niter,resrel] = jacobi(A,b,TOL,MAXITER)
             TOL = 1e-6;
             MAXITER = 500;
         otherwise
-            error('jacobi:Nargin','Il numero di parametri di input inseriti non è valido.');
+            error('jacobi:Nargin',...
+                    'Il numero di parametri di input inseriti non è valido.');
     end
     
 %% Jacobi
@@ -63,6 +64,8 @@ function [x,niter,resrel] = jacobi(A,b,TOL,MAXITER)
     
 % Matrice di iterazione,anche essa sparsa
     Bj = speye(n,n) - DInv*A;
+%   Controllo effettuato se Bj è sparsa
+%   whos Bj
     
 % Controllo sulla validità di TOLX alla prima iterazione del ciclo
     TOLX = checkUnderflowTOLX(TOL,x);
@@ -81,7 +84,7 @@ function [x,niter,resrel] = jacobi(A,b,TOL,MAXITER)
         
         % Formula matriciale, 
         x = Bj*x + DInv*b;
-        
+    
         % Errore assoluto
         err = norm(x-xPrecedente,Inf);
         

@@ -34,7 +34,6 @@ function [Rank,OUT,IN] = PageRank(G)
 
 %% Inizializzazione e definzione dei parametri standard per l'algoritmo
     TOL = 1e-7;
-    p = 0.85;
 
 %% Risolvo problema dei self loop
 % Per rimuovere i problemi dei self loop, basta porre a 0 gli elementi
@@ -58,7 +57,10 @@ function [Rank,OUT,IN] = PageRank(G)
 
 % z_j = (1-p)/n se N_j ~= 0, 
 %       1/n     se N_j == 0 (dangling nodes)
-    z = (1-p)/n *(N~=0) + (N==0)/n;
+% metto 0.15 perchè come è fissato 0.85 lo è anche lui, infatti sarebbe
+% inutile prevedere un cambio di questi valori in quanto si è visto che essi
+% sono i migliori per ottenere un buon calcolo del rank
+    z = (0.15)/n *(N~=0) + (N==0)/n;
 
 % Calcolo la matrice diagonale (la memorizzo come un vettore)
 % Uso N come se fosse la matrice D, per evitare di fare assegnazioni 
@@ -69,7 +71,7 @@ function [Rank,OUT,IN] = PageRank(G)
     TOLX = checkUnderflowTOLX(TOL,Rank);
     
 % L'espressione viene calcolata solo una volta
-    pGD = p*G.*N;
+    pGD = 0.85*G.*N;
     
 % inizializzazione per il primo passo iterativo
     err=Inf; NITER=0;
